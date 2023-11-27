@@ -4,6 +4,7 @@ import { Server } from "socket.io";
 import cors from "cors";
 import path from "node:path";
 
+const PORT = process.env.PORT || 4000;
 const app = express();
 app.use(cors);
 const server = createServer(app);
@@ -46,6 +47,6 @@ io.on("connection", (socket) => {
 });
 // const ___dirnaame1 = path.resolve();
 // app.use(express.static(path.join(___dirnaame1, "/frontend/build")));
-server.listen(4000, () => {
-  console.log("server running at http://localhost:4000");
+server.listen(PORT, () => {
+  console.log("server running at http://localhost:4000", PORT);
 });
