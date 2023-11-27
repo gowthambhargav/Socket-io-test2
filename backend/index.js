@@ -2,6 +2,7 @@ import express from "express";
 import { createServer } from "node:http";
 import { Server } from "socket.io";
 import cors from "cors";
+import path from "node:path";
 
 const app = express();
 app.use(cors);
@@ -43,7 +44,8 @@ io.on("connection", (socket) => {
     });
   });
 });
-
+// const ___dirnaame1 = path.resolve();
+// app.use(express.static(path.join(___dirnaame1, "/frontend/build")));
 server.listen(4000, () => {
   console.log("server running at http://localhost:4000");
 });

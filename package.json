@@ -1,0 +1,13 @@
+{
+  "name": "socket-io-test2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/backend/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/index.js",
+    "build": "npm install && npm install --prefix frontend && npm install --prefix backend && && npm run build --prefix frontend"
+  },
+  "author": "",
+  "license": "ISC"
+}
