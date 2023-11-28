@@ -28,7 +28,7 @@ function Chat() {
     return () => {
       socket.off("recive_msg"); // Remove the event listener
     };
-  }, [socket]);
+  }, []);
 
   const handelChange = (e) => {
     setMessage(e.target.value);
