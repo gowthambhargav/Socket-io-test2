@@ -22,6 +22,13 @@ io.on("connection", (socket) => {
     };
     io.emit("recive_msg", Chatdata);
   });
+  socket.on("private_message", (data) => {
+    console.log("from private msg", data);
+    const from = socket.userID;
+
+    io.to(data.to[0]).to(data.from).emit("private_message", data);
+    // io.to(data.from).emit("private_message", data);
+  });
   socket.on("join", (user) => {
     // When a new user connects, add them to the list of connected users
     connectedUsers[socket.id] = {
@@ -30,7 +37,7 @@ io.on("connection", (socket) => {
       email: user.email,
     };
 
-    console.log("User connected:", user.userName, user.email);
+    console.log("User connected:", user.userName, user.email, socket.id);
 
     // Send the updated list of connected users to all clients
     io.emit("connectedUsers", connectedUsers);
