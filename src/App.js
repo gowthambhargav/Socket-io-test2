@@ -3,7 +3,7 @@ import Chat from "./pages/chat";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-[#d3fd7e]">
       <Chat />
     </div>
   );
