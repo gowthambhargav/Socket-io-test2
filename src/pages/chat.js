@@ -37,6 +37,7 @@ function Chat() {
     socket.on("private_message", (data) => {
       setPrivateChats((prevMessages) => [...prevMessages, data]);
     });
+
     window.onbeforeunload = confirmExit;
     function confirmExit() {
       return "show warning";
@@ -50,15 +51,9 @@ function Chat() {
     setMessage(e.target.value);
   };
   const handelSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const author = localStorage.getItem("name");
     const time = new Date().getUTCMilliseconds() + new Date().getTime();
-    const fromUser = Object.values(connectedUsers).find(
-      (user) => user.email === localStorage.getItem("email")
-    );
-
-    // Set 'from' to the found socket ID
-    setFrom(fromUser ? fromUser.socketId : null);
     if (isPrivate) {
       if (from !== undefined && from !== null) {
         socket.emit("private_message", {
@@ -76,6 +71,12 @@ function Chat() {
   };
 
   const handelChat = (e) => {
+    const fromUser = Object.values(connectedUsers).find(
+      (user) => user.email === localStorage.getItem("email")
+    );
+
+    // Set 'from' to the found socket ID
+    setFrom(fromUser ? fromUser.socketId : null);
     // # after clicking  on username log the userName and id
     const to = e.target.id;
     if (isPrivate) {
@@ -234,10 +235,15 @@ function Chat() {
                 })}
             <div className="w-full flex  m-2 relative content-center">
               <input
-                placeholder="Message"
+                placeholder="Type your message and press Enter"
                 value={message}
                 onChange={handelChange}
                 type="text"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handelSubmit();
+                  }
+                }}
                 className="border-2 mt-[20px] h-[50px] border-gray-500 rounded-md p-2 w-full"
               />
               {isPrivate && (
